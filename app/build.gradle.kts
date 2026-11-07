@@ -23,8 +23,8 @@ android {
         applicationId = "com.gymcat.app"   // unique id on the phone (different from Gym & Ñam)
         minSdk = 29
         targetSdk = 35
-        versionCode = 5
-        versionName = "1.0.4"
+        versionCode = 6
+        versionName = "1.0.5"
         vectorDrawables { useSupportLibrary = true }
     }
 
@@ -71,6 +71,10 @@ dependencies {
     implementation(libs.camerax.camera2)
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
+    // CameraX and Glance hand back a "ListenableFuture" (a value that arrives later).
+    // That class comes from Google's Guava library, which must be listed here so the
+    // compiler can see it. ("-android" = the Android-sized version. Same as Gym & Ñam.)
+    implementation(libs.guava)
     implementation(libs.zxing.core)                 // QR make + read (on the phone, no internet)
 
     implementation(libs.glance.appwidget)           // home-screen widgets

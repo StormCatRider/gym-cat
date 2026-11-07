@@ -22,7 +22,7 @@
 The cat drawings come from ChatGPT prompts that describe an original character. Under OpenAI's terms the outputs belong to you. Purely AI-made images may not get copyright protection, so others could copy them; that doesn't put you at risk. Before adding each image, check that it doesn't look like an existing character (Garfield, Pusheen, Hello Kitty, Grumpy Cat and so on) and has no logos or text.
 
 ## Libraries (Apache License 2.0)
-AndroidX (Core, Activity, Lifecycle, Fragment, Compose, Material 3, Material Icons Extended, Navigation, Room, DataStore, CameraX, Glance, WorkManager, Biometric, Health Connect client), Kotlin and kotlinx.coroutines (JetBrains), and ZXing core 3.5.3 (QR code create/read).
+AndroidX (Core, Activity, Lifecycle, Fragment, Compose, Material 3, Material Icons Extended, Navigation, Room, DataStore, CameraX, Glance, WorkManager, Biometric, Health Connect client), Kotlin and kotlinx.coroutines (JetBrains), ZXing core 3.5.3 (QR code create/read), and Google Guava 33.3.1-android (needed by CameraX and Glance).
 
 ## Emoji
 Emoji are drawn by the phone's own system font (on Pixel, Noto Color Emoji, OFL 1.1). None are bundled. The share-card image draws emoji with that same system font.

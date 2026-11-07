@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 — Nov 7 2026 (first compile fixes)
+- QR scanner: added Guava (`guava 33.3.1-android`, same as Gym & Ñam). CameraX returns a `ListenableFuture`, which lives in Guava.
+- Library: muscle names (translated text) were looked up inside `joinToString { }`, where screen code isn't allowed. Now they're looked up first with `map { }`.
+- Feedback: moved the meow lookup into its own function (the `@SuppressLint` note can't be placed on a `by lazy` value).
+
 ## 1.0.4 — Nov 7 2026 (first-build fix)
 - Android Studio stopped with "connect-client 1.1.0 requires compileSdk 36 and AGP 8.9.1". Updated to **AGP 8.9.1** and **compileSdk 36**, matching Gym & Ñam. minSdk (29) and targetSdk (35) are unchanged, so the same phones can install it and it behaves the same.
 

@@ -136,7 +136,7 @@ fun LibraryScreen(vm: MainViewModel, nav: NavHostController) {
                     }, modifier = Modifier.weight(1f)) {
                         Column(Modifier.fillMaxWidth()) {
                             Text(e.name(es), color = c.text, fontWeight = FontWeight.Medium)
-                            Muted(e.primary.joinToString { muscleName(it) } + " · " + equipmentName(e.equipment), size = 12)
+                            Muted(e.primary.map { muscleName(it) }.joinToString() + " · " + equipmentName(e.equipment), size = 12)
                         }
                     }
                     IconButton(onClick = { vm.toggleFavorite(e.id) }) {
@@ -178,8 +178,8 @@ fun ExerciseDetailScreen(vm: MainViewModel, nav: NavHostController, id: String) 
         }
         GCard {
             Text(stringResource(R.string.muscles_worked), fontWeight = FontWeight.SemiBold, color = c.text)
-            Text(stringResource(R.string.primary) + ": " + e.primary.joinToString { muscleName(it) }, color = c.text)
-            if (e.secondary.isNotEmpty()) Muted(stringResource(R.string.secondary) + ": " + e.secondary.joinToString { muscleName(it) })
+            Text(stringResource(R.string.primary) + ": " + e.primary.map { muscleName(it) }.joinToString(), color = c.text)
+            if (e.secondary.isNotEmpty()) Muted(stringResource(R.string.secondary) + ": " + e.secondary.map { muscleName(it) }.joinToString())
         }
         GCard {
             Text(stringResource(R.string.how_to), fontWeight = FontWeight.SemiBold, color = c.text)

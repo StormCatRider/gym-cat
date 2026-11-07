@@ -64,10 +64,12 @@ class Feedback(private val context: Context) {
     }
 
     /** Finds meow_1 … meow_9 in res/raw by name (so the app builds even with no files). */
+    private val meowIds: List<Int> by lazy { findMeows() }
+
+    // (The "suppress" note can't sit on a "by lazy" value, so the search lives in its own function.)
     @SuppressLint("DiscouragedApi")
-    private val meowIds: List<Int> by lazy {
+    private fun findMeows(): List<Int> =
         (1..9).map { context.resources.getIdentifier("meow_$it", "raw", context.packageName) }.filter { it != 0 }
-    }
 
     /** chance = probability (0..1) so "random after a set" doesn't meow every time. */
     fun meow(chance: Double = 1.0) {

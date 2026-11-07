@@ -21,6 +21,7 @@ biometric = "1.1.0"
 fragment = "1.8.5"
 healthConnect = "1.1.0"
 coroutines = "1.9.0"
+guava = "33.3.1-android"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,7 @@ camerax-core = { group = "androidx.camera", name = "camera-core", version.ref = 
 camerax-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
 camerax-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
 camerax-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 zxing-core = { group = "com.google.zxing", name = "core", version.ref = "zxing" }
 glance-appwidget = { group = "androidx.glance", name = "glance-appwidget", version.ref = "glance" }
 glance-material3 = { group = "androidx.glance", name = "glance-material3", version.ref = "glance" }
