@@ -18,6 +18,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -87,6 +88,9 @@ class MainActivity : FragmentActivity() {
     private var pendingShared by mutableStateOf<String?>(null)
     private var startNext by mutableStateOf(false)              // widget "Start" button
 
+    // Android 10–12: show this screen in the language picked inside the app.
+    override fun attachBaseContext(newBase: android.content.Context) = super.attachBaseContext(com.gymcat.app.ui.AppLanguage.wrap(newBase))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -99,6 +103,7 @@ class MainActivity : FragmentActivity() {
                 if (ready != null && !(s.lockEnabled && s.pinHash.isNotBlank())) vm.locked.value = false
             }
             GymCatTheme(s.palette, s.themeMode) {
+              Box(Modifier.fillMaxSize().background(GymColors.current.bg)) {
                 when {
                     ready == null -> Box(Modifier.fillMaxSize())
                     intent?.action == "androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE" ||
@@ -112,6 +117,7 @@ class MainActivity : FragmentActivity() {
                         if (s.lockEnabled && s.pinHash.isNotBlank() && locked) LockScreen(this@MainActivity, vm) { vm.locked.value = false }
                     }
                 }
+              }
             }
         }
     }

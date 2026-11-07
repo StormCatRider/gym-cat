@@ -289,6 +289,11 @@
     <string name="privacy_body">Gym Cat only uses Health Connect if you turn it on.\n\n• Writes: calories burned for each workout, so Gym &amp; Ñam can add them to your day.\n• Reads: your body weight (for calorie estimates and the weight chart) and today\'s protein total.\n\nNothing is sent anywhere: Gym Cat has no internet access. You can turn this off any time in Settings or in Health Connect.</string>
     <string name="welcome_title">Hi! I\'m Gym Cat</string>
     <string name="welcome_body">A few quick questions and I\'ll suggest a plan for you.</string>
+    <string name="language">Language</string>
+    <string name="lang_phone">Phone language</string>
+    <string name="units_imperial">lb · in · mi</string>
+    <string name="units_metric">kg · cm · km</string>
+    <string name="units_change_later">You can change these later in Settings.</string>
     <string name="q_level">How much have you trained?</string>
     <string name="q_goal">What\'s your main goal?</string>
     <string name="q_days">How many days a week can you train?</string>

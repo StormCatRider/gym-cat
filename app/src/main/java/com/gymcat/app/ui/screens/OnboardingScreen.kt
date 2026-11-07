@@ -2,7 +2,7 @@
 ╔══════════════════════════════════════════════════════════════════╗
 ║ PLAIN-ENGLISH GUIDE — ui/screens/OnboardingScreen.kt               ║
 ║ First launch, 6 short steps (your choices):                        ║
-║  welcome → experience level → goal → days per week + equipment →   ║
+║  welcome (+ language and lb/kg) → experience level → goal → days per week + equipment →   ║
 ║  body (sex, height, weight — or read weight from Gym & Ñam) →      ║
 ║  suggested program (you can pick another or none).                 ║
 ║ Easy wording for friends who are new to the gym.                   ║
@@ -10,7 +10,11 @@
 */
 package com.gymcat.app.ui.screens
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import androidx.activity.compose.rememberLauncherForActivityResult
+import kotlin.math.roundToInt
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,7 +22,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -40,6 +46,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gymcat.app.GymCatApp
@@ -48,6 +55,8 @@ import com.gymcat.app.core.model.EquipmentAccess
 import com.gymcat.app.core.model.Goal
 import com.gymcat.app.core.model.Level
 import com.gymcat.app.core.programs.Programs
+import com.gymcat.app.core.calc.BodyMath
+import com.gymcat.app.ui.AppLanguage
 import com.gymcat.app.ui.Fmt
 import com.gymcat.app.ui.MainViewModel
 import com.gymcat.app.ui.components.Cat
@@ -60,7 +69,9 @@ import com.gymcat.app.ui.theme.GymColors
 @Composable
 fun OnboardingScreen(vm: MainViewModel) {
     val c = GymColors.current
-    val app = LocalContext.current.applicationContext as GymCatApp
+    val ctx = LocalContext.current
+    val app = ctx.applicationContext as GymCatApp
+    var lang by remember { mutableStateOf(AppLanguage.get(ctx)) }
     val s by vm.settings.collectAsState()
     var step by remember { mutableIntStateOf(0) }
     var level by remember { mutableStateOf(Level.BEGINNER) }
@@ -79,39 +90,61 @@ fun OnboardingScreen(vm: MainViewModel) {
         if (granted.containsAll(app.repo.health.permissions)) { vm.updateSettings { it.copy(healthConnect = true) }; vm.refreshHealth() }
     }
 
-    Column(Modifier.fillMaxSize().padding(24.dp)) {
+    Column(Modifier.fillMaxSize().safeDrawingPadding().padding(horizontal = 24.dp, vertical = 12.dp)) {
         LinearProgressIndicator(progress = { step / last.toFloat() }, Modifier.fillMaxWidth(), color = c.accent)
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(top = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
             CatArt(if (step == 0) Cat.WELCOME else Cat.THINKING, if (step == 0) "👋" else "🤔", 120.dp)
             when (step) {
                 0 -> {
-                    Text(stringResource(R.string.welcome_title), fontWeight = FontWeight.Bold, fontSize = 26.sp, color = c.text)
-                    Muted(stringResource(R.string.welcome_body))
+                    Text(stringResource(R.string.welcome_title), Modifier.fillMaxWidth(), fontWeight = FontWeight.Bold, fontSize = 26.sp,
+                        color = c.text, textAlign = TextAlign.Center)
+                    Text(stringResource(R.string.welcome_body), Modifier.fillMaxWidth(), color = c.text2, fontSize = 15.sp, textAlign = TextAlign.Center)
+                    GCard {
+                        // Language: changes right away (the screen redraws in the new language).
+                        Text(stringResource(R.string.language), fontWeight = FontWeight.SemiBold, color = c.text)
+                        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            listOf("" to stringResource(R.string.lang_phone), "en" to "English", "es" to "Español").forEach { (tag, label) ->
+                                FilterChip(lang == tag, { lang = tag; ctx.findActivity()?.let { AppLanguage.set(it, tag) } }, { Text(label) })
+                            }
+                        }
+                        Spacer(Modifier.height(8.dp))
+                        // Units: kg also turns on kg plates. Data is always saved in lb (Gym & Ñam match).
+                        Text(stringResource(R.string.units), fontWeight = FontWeight.SemiBold, color = c.text)
+                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            FilterChip(!s.metric, { vm.updateSettings { it.copy(metric = false, plateKg = false) } }, { Text(stringResource(R.string.units_imperial)) })
+                            FilterChip(s.metric, { vm.updateSettings { it.copy(metric = true, plateKg = true) } }, { Text(stringResource(R.string.units_metric)) })
+                        }
+                        Muted(stringResource(R.string.units_change_later), size = 12)
+                    }
                 }
                 1 -> Choice(stringResource(R.string.q_level), stringArrayResource(R.array.levels).toList(), level.ordinal) { level = Level.entries[it] }
                 2 -> Choice(stringResource(R.string.q_goal), stringArrayResource(R.array.goals).toList(), goal.ordinal) { goal = Goal.entries[it] }
                 3 -> {
-                    Text(stringResource(R.string.q_days), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text)
+                    Text(stringResource(R.string.q_days), Modifier.fillMaxWidth(), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text, textAlign = TextAlign.Center)
                     Stepper(stringResource(R.string.days), days.toString(), { days = (days - 1).coerceAtLeast(1) }, { days = (days + 1).coerceAtMost(7) })
                     Choice(stringResource(R.string.q_equipment), stringArrayResource(R.array.equipment_access).toList(), access.ordinal) { access = EquipmentAccess.entries[it] }
                 }
                 4 -> {
-                    Text(stringResource(R.string.q_body), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text)
-                    Muted(stringResource(R.string.q_body_why))
+                    Text(stringResource(R.string.q_body), Modifier.fillMaxWidth(), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text, textAlign = TextAlign.Center)
+                    Text(stringResource(R.string.q_body_why), Modifier.fillMaxWidth(), color = c.text2, fontSize = 13.sp, textAlign = TextAlign.Center)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         FilterChip(!sexFemale, { sexFemale = false }, { Text(stringResource(R.string.male)) })
                         FilterChip(sexFemale, { sexFemale = true }, { Text(stringResource(R.string.female)) })
                     }
-                    Stepper(stringResource(R.string.height) + " (in)", Fmt.num(height), { height -= 0.5 }, { height += 0.5 })
-                    Stepper(stringResource(R.string.body_weight) + " (lb)", Fmt.num(weight), { weight -= 1 }, { weight += 1 })
+                    // Shown in cm/kg or in/lb; always saved in inches and lb.
+                    val m = s.metric
+                    Stepper(stringResource(R.string.height) + " (" + Fmt.lengthUnit(m) + ")", Fmt.lengthNum(height, m),
+                        { height = stepHeight(height, -1, m) }, { height = stepHeight(height, +1, m) })
+                    Stepper(stringResource(R.string.body_weight) + " (" + Fmt.weightUnit(m) + ")", Fmt.weightNum(weight, m),
+                        { weight = stepWeight(weight, -1, m) }, { weight = stepWeight(weight, +1, m) })
                     if (app.repo.health.isAvailable()) OutlinedButton(onClick = { hcLauncher.launch(app.repo.health.permissions) }) {
                         Text(stringResource(R.string.read_from_gymnam))
                     }
-                    if (s.healthConnect && s.hcWeightLb > 0) Muted(stringResource(R.string.using_hc_weight, Fmt.weight(s.hcWeightLb, false)))
+                    if (s.healthConnect && s.hcWeightLb > 0) Muted(stringResource(R.string.using_hc_weight, Fmt.weight(s.hcWeightLb, s.metric)))
                 }
                 else -> {
-                    Text(stringResource(R.string.q_program), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text)
+                    Text(stringResource(R.string.q_program), Modifier.fillMaxWidth(), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text, textAlign = TextAlign.Center)
                     Programs.all.forEach { p ->
                         GCard(onClick = { program = p.id }) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -145,8 +178,27 @@ fun OnboardingScreen(vm: MainViewModel) {
 @Composable
 private fun Choice(question: String, options: List<String>, selected: Int, onPick: (Int) -> Unit) {
     val c = GymColors.current
-    Text(question, fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text)
+    Text(question, Modifier.fillMaxWidth(), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text, textAlign = TextAlign.Center)
     options.forEachIndexed { i, o ->
         GCard(onClick = { onPick(i) }) { Text((if (i == selected) "✅ " else "") + o, color = c.text) }
     }
+}
+
+/** Height ± one step: 0.5 in, or 1 whole cm in metric. Kept between 40 and 96 in. */
+private fun stepHeight(inches: Double, dir: Int, metric: Boolean): Double {
+    val next = if (metric) BodyMath.cmToIn((BodyMath.inToCm(inches).roundToInt() + dir).toDouble()) else inches + 0.5 * dir
+    return next.coerceIn(40.0, 96.0)
+}
+
+/** Weight ± one step: 1 lb, or 0.5 kg in metric. Kept between 60 and 700 lb. */
+private fun stepWeight(lb: Double, dir: Int, metric: Boolean): Double {
+    val next = if (metric) BodyMath.kgToLb(((BodyMath.lbToKg(lb) * 2).roundToInt() + dir) / 2.0) else lb + dir
+    return next.coerceIn(60.0, 700.0)
+}
+
+/** Finds the screen (Activity) behind a Compose context, so the language can reopen it. */
+private fun Context.findActivity(): Activity? {
+    var c: Context? = this
+    while (c is ContextWrapper) { if (c is Activity) return c; c = c.baseContext }
+    return null
 }

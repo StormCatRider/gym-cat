@@ -33,6 +33,9 @@ class GymCatApp : Application() {
     lateinit var feedback: Feedback; private set
     val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
+    // Android 10–12: open the app in the language picked inside the app (see ui/AppLanguage.kt).
+    override fun attachBaseContext(base: android.content.Context) = super.attachBaseContext(com.gymcat.app.ui.AppLanguage.wrap(base))
+
     override fun onCreate() {
         super.onCreate()
         val db = GymDatabase.create(this)

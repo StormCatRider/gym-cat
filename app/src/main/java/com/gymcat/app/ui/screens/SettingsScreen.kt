@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -140,6 +141,22 @@ fun SettingsScreen(vm: MainViewModel, nav: NavHostController) {
             val modeNames = stringArrayResource(R.array.theme_modes)
             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 modes.forEachIndexed { i, m -> FilterChip(s.themeMode == m, { vm.updateSettings { it.copy(themeMode = m) } }, { Text(modeNames[i]) }) }
+            }
+        }
+
+        // Language: follow the phone, or pick English / Español just for this app.
+        SectionTitle(stringResource(R.string.language))
+        GCard {
+            val ctx = androidx.compose.ui.platform.LocalContext.current
+            var lang by remember { mutableStateOf(com.gymcat.app.ui.AppLanguage.get(ctx)) }
+            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                listOf("" to stringResource(R.string.lang_phone), "en" to "English", "es" to "Español").forEach { (tag, label) ->
+                    FilterChip(lang == tag, {
+                        lang = tag
+                        (ctx as? android.app.Activity ?: (ctx as? android.content.ContextWrapper)?.baseContext as? android.app.Activity)
+                            ?.let { com.gymcat.app.ui.AppLanguage.set(it, tag) }
+                    }, { Text(label) })
+                }
             }
         }
 

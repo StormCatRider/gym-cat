@@ -61,6 +61,7 @@ This guide explains how the app is put together, where everything lives, and how
 | `service/Feedback.kt` | Beeps, vibration, voice, meows |
 | `service/Workers.kt` | Daily reminders, weekly auto-backup |
 | `ui/theme/Theme.kt` | The 4 palettes, dark mode, 28 dp cards |
+| `ui/AppLanguage.kt` | In-app language choice (phone / English / Español) |
 | `ui/Format.kt` | How numbers are shown (lb/kg, mi/km, 1:23, pace) |
 | `ui/components/` | Cards, steppers, charts, cat pictures, muscle map |
 | `ui/screens/` | One file per screen (Home, Workout, Finish, Routines, Library, Cardio, Stretch, Progress, Body, Settings, Onboarding, QR, Lock) |

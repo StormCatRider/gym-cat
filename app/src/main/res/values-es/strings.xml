@@ -289,6 +289,11 @@
     <string name="privacy_body">Gym Cat solo usa Health Connect si tú lo activas.\n\n• Escribe: las calorías quemadas de cada entrenamiento, para que Gym &amp; Ñam las sume a tu día.\n• Lee: tu peso corporal (para estimar calorías y la gráfica de peso) y la proteína total de hoy.\n\nNada se envía a ningún lado: Gym Cat no tiene acceso a internet. Puedes apagarlo cuando quieras en Ajustes o en Health Connect.</string>
     <string name="welcome_title">¡Hola! Soy Gym Cat</string>
     <string name="welcome_body">Unas preguntas rápidas y te sugiero un plan.</string>
+    <string name="language">Idioma</string>
+    <string name="lang_phone">Idioma del teléfono</string>
+    <string name="units_imperial">lb · in · mi</string>
+    <string name="units_metric">kg · cm · km</string>
+    <string name="units_change_later">Puedes cambiarlos después en Ajustes.</string>
     <string name="q_level">¿Cuánto has entrenado?</string>
     <string name="q_goal">¿Cuál es tu meta principal?</string>
     <string name="q_days">¿Cuántos días a la semana puedes entrenar?</string>

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.6 — Nov 7 2026 (first run on a phone)
+- **Unreadable first screens:** with the phone in dark mode, onboarding drew light text on the phone's light window color. Every screen now sits on the palette background (light or dark to match the text).
+- Onboarding no longer slides under the status bar (safe-area padding), and titles and questions are centered.
+- **Welcome step:** pick the language (phone / English / Español) and units (lb · in · mi or kg · cm · km). Choosing kg also turns on kg plates.
+- Body step shows height and weight in cm/kg when metric is on (steps of 1 cm and 0.5 kg; still saved in in/lb).
+- **Settings → Language:** same three choices. Android 13+ uses the phone's per-app language (also listed in Android's app settings); Android 10–12 remembers it in the app.
+
 ## 1.0.5 — Nov 7 2026 (first compile fixes)
 - QR scanner: added Guava (`guava 33.3.1-android`, same as Gym & Ñam). CameraX returns a `ListenableFuture`, which lives in Guava.
 - Library: muscle names (translated text) were looked up inside `joinToString { }`, where screen code isn't allowed. Now they're looked up first with `map { }`.

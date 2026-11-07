@@ -214,6 +214,11 @@ S = {
  # Onboarding
  "welcome_title": ("Hi! I'm Gym Cat", "¡Hola! Soy Gym Cat"),
  "welcome_body": ("A few quick questions and I'll suggest a plan for you.", "Unas preguntas rápidas y te sugiero un plan."),
+ "language": ("Language", "Idioma"),
+ "lang_phone": ("Phone language", "Idioma del teléfono"),
+ "units_imperial": ("lb · in · mi", "lb · in · mi"),
+ "units_metric": ("kg · cm · km", "kg · cm · km"),
+ "units_change_later": ("You can change these later in Settings.", "Puedes cambiarlos después en Ajustes."),
  "q_level": ("How much have you trained?", "¿Cuánto has entrenado?"),
  "q_goal": ("What's your main goal?", "¿Cuál es tu meta principal?"),
  "q_days": ("How many days a week can you train?", "¿Cuántos días a la semana puedes entrenar?"),
