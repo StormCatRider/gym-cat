@@ -209,7 +209,9 @@ fun ExerciseDetailScreen(vm: MainViewModel, nav: NavHostController, id: String) 
             val rest = pref?.restSec ?: 0
             Stepper(stringResource(R.string.your_rest), if (rest == 0) stringResource(R.string.default_short) else Fmt.duration(rest.toLong()),
                 { vm.setRest(id, (rest - 15).coerceAtLeast(0)) },
-                { vm.setRest(id, (if (rest == 0) defaultRest(e, s.restCompound, s.restIsolation, s.restCalisthenics) else rest) + 15) })
+                { vm.setRest(id, (if (rest == 0) defaultRest(e, s.restCompound, s.restIsolation, s.restCalisthenics) else rest) + 15) },
+                isTime = true, editValue = if (rest == 0) "" else Fmt.duration(rest.toLong()),
+                onSet = { v -> vm.setRest(id, v.toInt().coerceIn(0, 1800)) })
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { nav.navigate("custom/" + (if (e.custom) id else "copy_$id")) }) {

@@ -139,7 +139,8 @@ fun StretchScreen(vm: MainViewModel, nav: NavHostController) {
                                 Text(vm.exName(id), Modifier.weight(1f), color = c.text)
                                 Stepper(stringResource(R.string.seconds), sec.toString(),
                                     { vm.stretchList.value = list.toMutableList().also { it[i] = id to (sec - 5).coerceAtLeast(10) } },
-                                    { vm.stretchList.value = list.toMutableList().also { it[i] = id to sec + 5 } })
+                                    { vm.stretchList.value = list.toMutableList().also { it[i] = id to sec + 5 } },
+                                    onSet = { v -> vm.stretchList.value = list.toMutableList().also { it[i] = id to v.toInt().coerceIn(10, 600) } })
                                 IconButton(onClick = { vm.stretchList.value = list.toMutableList().also { it.removeAt(i) } }) {
                                     Icon(Icons.Filled.Delete, stringResource(R.string.delete))
                                 }

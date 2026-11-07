@@ -290,6 +290,7 @@
     <string name="welcome_title">¡Hola! Soy Gym Cat</string>
     <string name="welcome_body">Unas preguntas rápidas y te sugiero un plan.</string>
     <string name="language">Idioma</string>
+    <string name="time_entry_hint">Escribe 1:30 (min:seg) o solo segundos, como 90. Para una hora: 18:30.</string>
     <string name="lang_phone">Idioma del teléfono</string>
     <string name="units_imperial">lb · in · mi</string>
     <string name="units_metric">kg · cm · km</string>

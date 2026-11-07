@@ -175,15 +175,18 @@ fun SettingsScreen(vm: MainViewModel, nav: NavHostController) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                 Stepper(stringResource(R.string.height) + " (" + Fmt.lengthUnit(s.metric) + ")", Fmt.lengthNum(s.heightIn, s.metric),
                     { vm.updateSettings { it.copy(heightIn = (it.heightIn - 0.5).coerceAtLeast(40.0)) } },
-                    { vm.updateSettings { it.copy(heightIn = (it.heightIn + 0.5).coerceAtMost(96.0)) } })
+                    { vm.updateSettings { it.copy(heightIn = (it.heightIn + 0.5).coerceAtMost(96.0)) } },
+                    onSet = { v -> vm.updateSettings { it.copy(heightIn = Fmt.toIn(v, it.metric).coerceIn(40.0, 96.0)) } })
                 Stepper(stringResource(R.string.body_weight) + " (" + Fmt.weightUnit(s.metric) + ")", Fmt.weightNum(s.bodyLb, s.metric),
                     { vm.updateSettings { it.copy(bodyLb = (it.bodyLb - 1).coerceAtLeast(60.0)) } },
-                    { vm.updateSettings { it.copy(bodyLb = it.bodyLb + 1) } })
+                    { vm.updateSettings { it.copy(bodyLb = it.bodyLb + 1) } },
+                    onSet = { v -> vm.updateSettings { it.copy(bodyLb = Fmt.toLb(v, it.metric).coerceIn(60.0, 700.0)) } })
             }
             if (s.healthConnect && s.hcWeightLb > 0) Muted(stringResource(R.string.using_hc_weight, Fmt.weight(s.hcWeightLb, s.metric)), size = 12)
             Stepper(stringResource(R.string.weekly_goal_days), s.weeklyGoal.toString(),
                 { vm.updateSettings { it.copy(weeklyGoal = (it.weeklyGoal - 1).coerceAtLeast(1)) } },
-                { vm.updateSettings { it.copy(weeklyGoal = (it.weeklyGoal + 1).coerceAtMost(7)) } })
+                { vm.updateSettings { it.copy(weeklyGoal = (it.weeklyGoal + 1).coerceAtMost(7)) } },
+                onSet = { v -> vm.updateSettings { it.copy(weeklyGoal = v.toInt().coerceIn(1, 7)) } })
         }
 
         SectionTitle(stringResource(R.string.workout_settings))
@@ -191,12 +194,15 @@ fun SettingsScreen(vm: MainViewModel, nav: NavHostController) {
             Text(stringResource(R.string.default_rest), color = c.text)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                 Stepper(stringResource(R.string.compound), Fmt.duration(s.restCompound.toLong()),
-                    { vm.updateSettings { it.copy(restCompound = (it.restCompound - 15).coerceAtLeast(15)) } }, { vm.updateSettings { it.copy(restCompound = it.restCompound + 15) } })
+                    { vm.updateSettings { it.copy(restCompound = (it.restCompound - 15).coerceAtLeast(15)) } }, { vm.updateSettings { it.copy(restCompound = it.restCompound + 15) } },
+                    isTime = true, onSet = { v -> vm.updateSettings { it.copy(restCompound = v.toInt().coerceIn(15, 1800)) } })
                 Stepper(stringResource(R.string.isolation), Fmt.duration(s.restIsolation.toLong()),
-                    { vm.updateSettings { it.copy(restIsolation = (it.restIsolation - 15).coerceAtLeast(15)) } }, { vm.updateSettings { it.copy(restIsolation = it.restIsolation + 15) } })
+                    { vm.updateSettings { it.copy(restIsolation = (it.restIsolation - 15).coerceAtLeast(15)) } }, { vm.updateSettings { it.copy(restIsolation = it.restIsolation + 15) } },
+                    isTime = true, onSet = { v -> vm.updateSettings { it.copy(restIsolation = v.toInt().coerceIn(15, 1800)) } })
             }
             Stepper(stringResource(R.string.calisthenics), Fmt.duration(s.restCalisthenics.toLong()),
-                { vm.updateSettings { it.copy(restCalisthenics = (it.restCalisthenics - 15).coerceAtLeast(15)) } }, { vm.updateSettings { it.copy(restCalisthenics = it.restCalisthenics + 15) } })
+                { vm.updateSettings { it.copy(restCalisthenics = (it.restCalisthenics - 15).coerceAtLeast(15)) } }, { vm.updateSettings { it.copy(restCalisthenics = it.restCalisthenics + 15) } },
+                    isTime = true, onSet = { v -> vm.updateSettings { it.copy(restCalisthenics = v.toInt().coerceIn(15, 1800)) } })
             SwitchRow(stringResource(R.string.keep_screen_on), s.keepScreenOn) { v -> vm.updateSettings { it.copy(keepScreenOn = v) } }
             SwitchRow(stringResource(R.string.workout_notification), s.workoutNotification) { v ->
                 if (v) askNotifications(); vm.updateSettings { it.copy(workoutNotification = v) }
@@ -241,7 +247,12 @@ fun SettingsScreen(vm: MainViewModel, nav: NavHostController) {
                 }
                 Stepper(stringResource(R.string.time), "%d:%02d".format(s.remindHour, s.remindMinute),
                     { vm.updateSettings { val t = it.remindHour * 60 + it.remindMinute - 30; it.copy(remindHour = (t / 60).mod(24), remindMinute = t.mod(60)) } },
-                    { vm.updateSettings { val t = it.remindHour * 60 + it.remindMinute + 30; it.copy(remindHour = (t / 60).mod(24), remindMinute = t.mod(60)) } })
+                    { vm.updateSettings { val t = it.remindHour * 60 + it.remindMinute + 30; it.copy(remindHour = (t / 60).mod(24), remindMinute = t.mod(60)) } },
+                    // Typed as hour:minute (24 h). parseSeconds reads "18:30" as 18×60+30, so here that number = minutes of the day.
+                    isTime = true, onSet = { v ->
+                        val typed = v.toInt(); val t = if (typed < 24) typed * 60 else typed      // just "7" = 7:00
+                        if (t < 24 * 60) vm.updateSettings { it.copy(remindHour = t / 60, remindMinute = t % 60) }
+                    })
             }
             SwitchRow(stringResource(R.string.remind_measure), s.remindMeasure, stringResource(R.string.remind_measure_sub)) { v ->
                 if (v) askNotifications(); vm.updateSettings { it.copy(remindMeasure = v) }

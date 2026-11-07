@@ -122,7 +122,8 @@ fun OnboardingScreen(vm: MainViewModel) {
                 2 -> Choice(stringResource(R.string.q_goal), stringArrayResource(R.array.goals).toList(), goal.ordinal) { goal = Goal.entries[it] }
                 3 -> {
                     Text(stringResource(R.string.q_days), Modifier.fillMaxWidth(), fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = c.text, textAlign = TextAlign.Center)
-                    Stepper(stringResource(R.string.days), days.toString(), { days = (days - 1).coerceAtLeast(1) }, { days = (days + 1).coerceAtMost(7) })
+                    Stepper(stringResource(R.string.days), days.toString(), { days = (days - 1).coerceAtLeast(1) }, { days = (days + 1).coerceAtMost(7) },
+                        onSet = { v -> days = v.toInt().coerceIn(1, 7) })
                     Choice(stringResource(R.string.q_equipment), stringArrayResource(R.array.equipment_access).toList(), access.ordinal) { access = EquipmentAccess.entries[it] }
                 }
                 4 -> {
@@ -135,9 +136,11 @@ fun OnboardingScreen(vm: MainViewModel) {
                     // Shown in cm/kg or in/lb; always saved in inches and lb.
                     val m = s.metric
                     Stepper(stringResource(R.string.height) + " (" + Fmt.lengthUnit(m) + ")", Fmt.lengthNum(height, m),
-                        { height = stepHeight(height, -1, m) }, { height = stepHeight(height, +1, m) })
+                        { height = stepHeight(height, -1, m) }, { height = stepHeight(height, +1, m) },
+                        onSet = { v -> height = Fmt.toIn(v, m).coerceIn(40.0, 96.0) })
                     Stepper(stringResource(R.string.body_weight) + " (" + Fmt.weightUnit(m) + ")", Fmt.weightNum(weight, m),
-                        { weight = stepWeight(weight, -1, m) }, { weight = stepWeight(weight, +1, m) })
+                        { weight = stepWeight(weight, -1, m) }, { weight = stepWeight(weight, +1, m) },
+                        onSet = { v -> weight = Fmt.toLb(v, m).coerceIn(60.0, 700.0) })
                     if (app.repo.health.isAvailable()) OutlinedButton(onClick = { hcLauncher.launch(app.repo.health.permissions) }) {
                         Text(stringResource(R.string.read_from_gymnam))
                     }

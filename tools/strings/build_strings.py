@@ -215,6 +215,7 @@ S = {
  "welcome_title": ("Hi! I'm Gym Cat", "¡Hola! Soy Gym Cat"),
  "welcome_body": ("A few quick questions and I'll suggest a plan for you.", "Unas preguntas rápidas y te sugiero un plan."),
  "language": ("Language", "Idioma"),
+ "time_entry_hint": ("Type 1:30 (min:sec) or just seconds, like 90. For a clock time: 18:30.", "Escribe 1:30 (min:seg) o solo segundos, como 90. Para una hora: 18:30."),
  "lang_phone": ("Phone language", "Idioma del teléfono"),
  "units_imperial": ("lb · in · mi", "lb · in · mi"),
  "units_metric": ("kg · cm · km", "kg · cm · km"),

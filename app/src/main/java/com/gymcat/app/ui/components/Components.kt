@@ -60,6 +60,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextDecoration
+import com.gymcat.app.R
+import com.gymcat.app.ui.Fmt
 import com.gymcat.app.ui.theme.CardShape
 import com.gymcat.app.ui.theme.GymColors
 
@@ -130,23 +148,94 @@ fun BadgeIcon(emoji: String, size: Dp, modifier: Modifier = Modifier) {
     }
 }
 
-/** − value + with haptic ticks. step = how much each tap changes. */
+/**
+ * − value + with haptic ticks.
+ * Tap the number to TYPE it instead:
+ *   onSet    = what to do with the typed number (in the units shown)
+ *   editValue = what the box starts with (default: the shown value)
+ *   isTime   = the value is a time: type "1:30" (min:sec) or plain seconds ("90")
+ * onValueClick = a screen's own tap action (used by the workout set cards).
+ */
 @Composable
-fun Stepper(label: String, value: String, onMinus: () -> Unit, onPlus: () -> Unit, modifier: Modifier = Modifier, onValueClick: (() -> Unit)? = null) {
+fun Stepper(
+    label: String, value: String, onMinus: () -> Unit, onPlus: () -> Unit, modifier: Modifier = Modifier,
+    onValueClick: (() -> Unit)? = null, onSet: ((Double) -> Unit)? = null, editValue: String? = null, isTime: Boolean = false,
+) {
     val haptic = LocalHapticFeedback.current
     val c = GymColors.current
+    var typing by remember { mutableStateOf(false) }
+    val tap: (() -> Unit)? = onValueClick ?: if (onSet != null) ({ typing = true }) else null
     Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Muted(label, size = 12)
         Row(verticalAlignment = Alignment.CenterVertically) {
             FilledTonalIconButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove); onMinus() }, modifier = Modifier.size(40.dp)) {
                 Icon(Icons.Filled.Remove, contentDescription = "−")
             }
-            Text(value, Modifier.width(72.dp).let { if (onValueClick != null) it.clickable { onValueClick() } else it },
-                textAlign = TextAlign.Center, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = c.text)
+            // Underlined = you can tap it and type.
+            Text(value, Modifier.width(80.dp).let { if (tap != null) it.clickable { tap() } else it },
+                textAlign = TextAlign.Center, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = c.text,
+                textDecoration = if (tap != null) TextDecoration.Underline else null)
             FilledTonalIconButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove); onPlus() }, modifier = Modifier.size(40.dp)) {
                 Icon(Icons.Filled.Add, contentDescription = "+")
             }
         }
+    }
+    if (typing && onSet != null) {
+        if (isTime) TimeDialog(label, editValue ?: value, onDismiss = { typing = false }) { sec -> typing = false; onSet(sec.toDouble()) }
+        else NumberDialog(editValue ?: value, onDismiss = { typing = false }, title = label) { v -> typing = false; onSet(v) }
+    }
+}
+
+/** Type a number (accepts negative for "assisted" bodyweight sets). */
+@Composable
+fun NumberDialog(initial: String, onDismiss: () -> Unit, title: String? = null, onOk: (Double) -> Unit) {
+    // Starts with the whole number selected, so typing replaces it.
+    var field by remember { mutableStateOf(TextFieldValue(initial, TextRange(0, initial.length))) }
+    val focus = remember { FocusRequester() }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = if (title != null) ({ Text(title) }) else null,
+        text = {
+            OutlinedTextField(field, { field = it.copy(text = Fmt.cleanDecimal(it.text, allowNegative = true)) },
+                Modifier.focusRequester(focus),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal), singleLine = true)
+        },
+        confirmButton = { TextButton(onClick = { field.text.replace(',', '.').toDoubleOrNull()?.let(onOk) ?: onDismiss() }) { Text(stringResource(R.string.ok)) } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+    LaunchedEffect(Unit) { runCatching { focus.requestFocus() } }   // keyboard opens right away
+}
+
+/** Type a time: "1:30" = 1 min 30 s, or just seconds ("90"). Gives back seconds. */
+@Composable
+fun TimeDialog(title: String, initial: String, onDismiss: () -> Unit, onOk: (Int) -> Unit) {
+    var field by remember { mutableStateOf(TextFieldValue(initial, TextRange(0, initial.length))) }
+    val focus = remember { FocusRequester() }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(title) },
+        text = {
+            Column {
+                OutlinedTextField(field, { v -> field = v.copy(text = v.text.filter { it.isDigit() || it == ':' }.take(6)) },
+                    Modifier.focusRequester(focus),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text), singleLine = true)
+                Muted(stringResource(R.string.time_entry_hint), size = 12)
+            }
+        },
+        confirmButton = { TextButton(onClick = { parseSeconds(field.text)?.let(onOk) ?: onDismiss() }) { Text(stringResource(R.string.ok)) } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+    LaunchedEffect(Unit) { runCatching { focus.requestFocus() } }
+}
+
+/** "1:30" → 90, "90" → 90, "2:" → 120. Anything else → null. */
+fun parseSeconds(t: String): Int? {
+    val parts = t.trim().split(":")
+    return when (parts.size) {
+        1 -> parts[0].toIntOrNull()
+        2 -> { val m = parts[0].toIntOrNull() ?: 0; val sec = parts[1].ifEmpty { "0" }.toIntOrNull() ?: return null
+               if (sec > 59) null else m * 60 + sec }
+        else -> null
     }
 }
 

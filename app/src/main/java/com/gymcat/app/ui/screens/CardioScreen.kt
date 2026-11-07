@@ -204,10 +204,13 @@ private fun IntervalPanel(vm: MainViewModel, nav: NavHostController, exId: Strin
 
     if (!running && !done) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-            Stepper(stringResource(R.string.work), Fmt.duration(work.toLong()), { work = (work - 5).coerceAtLeast(5) }, { work += 5 })
-            Stepper(stringResource(R.string.rest), Fmt.duration(rest.toLong()), { rest = (rest - 5).coerceAtLeast(0) }, { rest += 5 })
+            Stepper(stringResource(R.string.work), Fmt.duration(work.toLong()), { work = (work - 5).coerceAtLeast(5) }, { work += 5 },
+                isTime = true, onSet = { v -> work = v.toInt().coerceIn(5, 3600) })
+            Stepper(stringResource(R.string.rest), Fmt.duration(rest.toLong()), { rest = (rest - 5).coerceAtLeast(0) }, { rest += 5 },
+                isTime = true, onSet = { v -> rest = v.toInt().coerceIn(0, 3600) })
         }
-        Stepper(stringResource(R.string.rounds), rounds.toString(), { rounds = (rounds - 1).coerceAtLeast(1) }, { rounds++ })
+        Stepper(stringResource(R.string.rounds), rounds.toString(), { rounds = (rounds - 1).coerceAtLeast(1) }, { rounds++ },
+            onSet = { v -> rounds = v.toInt().coerceIn(1, 100) })
         Muted(stringResource(R.string.total) + ": " + Fmt.duration((rounds * work + (rounds - 1) * rest).toLong()))
         Button(onClick = { running = true }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.start)) }
     } else if (running) {

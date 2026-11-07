@@ -210,24 +210,30 @@ fun RoutineEditorScreen(vm: MainViewModel, nav: NavHostController) {
                 }
                 when (e?.mode) {
                     LogMode.CARDIO -> Stepper(stringResource(R.string.minutes), item.minutes.toString(),
-                        { update(i) { x -> x.copy(minutes = (x.minutes - 5).coerceAtLeast(1)) } }, { update(i) { x -> x.copy(minutes = x.minutes + 5) } })
+                        { update(i) { x -> x.copy(minutes = (x.minutes - 5).coerceAtLeast(1)) } }, { update(i) { x -> x.copy(minutes = x.minutes + 5) } },
+                        onSet = { v -> update(i) { x -> x.copy(minutes = v.toInt().coerceIn(1, 600)) } })
                     LogMode.STRETCH, LogMode.HOLD -> Row {
                         if (e?.mode == LogMode.HOLD) Stepper(stringResource(R.string.sets), item.sets.toString(),
-                            { update(i) { x -> x.copy(sets = (x.sets - 1).coerceAtLeast(1)) } }, { update(i) { x -> x.copy(sets = x.sets + 1) } })
+                            { update(i) { x -> x.copy(sets = (x.sets - 1).coerceAtLeast(1)) } }, { update(i) { x -> x.copy(sets = x.sets + 1) } },
+                                onSet = { v -> update(i) { x -> x.copy(sets = v.toInt().coerceIn(1, 20)) } })
                         Stepper(stringResource(R.string.seconds), item.holdSec.toString(),
-                            { update(i) { x -> x.copy(holdSec = (x.holdSec - 5).coerceAtLeast(5)) } }, { update(i) { x -> x.copy(holdSec = x.holdSec + 5) } })
+                            { update(i) { x -> x.copy(holdSec = (x.holdSec - 5).coerceAtLeast(5)) } }, { update(i) { x -> x.copy(holdSec = x.holdSec + 5) } },
+                            onSet = { v -> update(i) { x -> x.copy(holdSec = v.toInt().coerceIn(5, 3600)) } })
                     }
                     else -> {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                             Stepper(stringResource(R.string.sets), item.sets.toString(),
-                                { update(i) { x -> x.copy(sets = (x.sets - 1).coerceAtLeast(1)) } }, { update(i) { x -> x.copy(sets = x.sets + 1) } })
+                                { update(i) { x -> x.copy(sets = (x.sets - 1).coerceAtLeast(1)) } }, { update(i) { x -> x.copy(sets = x.sets + 1) } },
+                                onSet = { v -> update(i) { x -> x.copy(sets = v.toInt().coerceIn(1, 20)) } })
                         }
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                             Stepper(stringResource(R.string.reps_min), item.repMin.toString(),
                                 { update(i) { x -> x.copy(repMin = (x.repMin - 1).coerceAtLeast(1)) } },
-                                { update(i) { x -> x.copy(repMin = x.repMin + 1, repMax = maxOf(x.repMax, x.repMin + 1)) } })
+                                { update(i) { x -> x.copy(repMin = x.repMin + 1, repMax = maxOf(x.repMax, x.repMin + 1)) } },
+                                onSet = { v -> update(i) { x -> val r = v.toInt().coerceIn(1, 100); x.copy(repMin = r, repMax = maxOf(x.repMax, r)) } })
                             Stepper(stringResource(R.string.reps_max), item.repMax.toString(),
-                                { update(i) { x -> x.copy(repMax = (x.repMax - 1).coerceAtLeast(x.repMin)) } }, { update(i) { x -> x.copy(repMax = x.repMax + 1) } })
+                                { update(i) { x -> x.copy(repMax = (x.repMax - 1).coerceAtLeast(x.repMin)) } }, { update(i) { x -> x.copy(repMax = x.repMax + 1) } },
+                                onSet = { v -> update(i) { x -> x.copy(repMax = v.toInt().coerceIn(x.repMin, 100)) } })
                         }
                         Muted(stringResource(R.string.target_rpe))
                         LazyRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -245,7 +251,9 @@ fun RoutineEditorScreen(vm: MainViewModel, nav: NavHostController) {
                 if (e?.mode != LogMode.CARDIO && e?.mode != LogMode.STRETCH) {
                     Stepper(stringResource(R.string.rest), if (item.restSec == 0) stringResource(R.string.default_short) else Fmt.duration(item.restSec.toLong()),
                         { update(i) { x -> x.copy(restSec = (x.restSec - 15).coerceAtLeast(0)) } },
-                        { update(i) { x -> x.copy(restSec = (if (x.restSec == 0) defaultRest(e, s.restCompound, s.restIsolation, s.restCalisthenics) else x.restSec) + 15) } })
+                        { update(i) { x -> x.copy(restSec = (if (x.restSec == 0) defaultRest(e, s.restCompound, s.restIsolation, s.restCalisthenics) else x.restSec) + 15) } },
+                        isTime = true, editValue = if (item.restSec == 0) "" else Fmt.duration(item.restSec.toLong()),
+                        onSet = { v -> update(i) { x -> x.copy(restSec = v.toInt().coerceIn(0, 1800)) } })
                     if (i < items.lastIndex) Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(stringResource(R.string.superset_with_next), Modifier.weight(1f), color = c.text)
                         val linked = item.superset != 0 && items[i + 1].superset == item.superset

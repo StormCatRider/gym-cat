@@ -94,6 +94,7 @@ import com.gymcat.app.ui.components.Cat
 import com.gymcat.app.ui.components.CatArt
 import com.gymcat.app.ui.components.GCard
 import com.gymcat.app.ui.components.Muted
+import com.gymcat.app.ui.components.NumberDialog
 import com.gymcat.app.ui.components.Pill
 import com.gymcat.app.ui.components.Stepper
 import com.gymcat.app.ui.theme.GymColors
@@ -392,21 +393,6 @@ private fun SetCard(vm: MainViewModel, set: SetEntity, mode: LogMode, dumbbell: 
     }
 }
 
-/** Type a number (accepts negative for "assisted" bodyweight sets). */
-@Composable
-fun NumberDialog(initial: String, onDismiss: () -> Unit, onOk: (Double) -> Unit) {
-    var text by remember { mutableStateOf(initial) }
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        text = {
-            OutlinedTextField(text, { text = Fmt.cleanDecimal(it, allowNegative = true) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal), singleLine = true)
-        },
-        confirmButton = { TextButton(onClick = { text.toDoubleOrNull()?.let(onOk) ?: onDismiss() }) { Text(stringResource(R.string.ok)) } },
-        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
-    )
-}
-
 /**
  * Plate calculator: per side = (target − bar) ÷ 2, filled heaviest-first.
  * lb set: 45 bar, 45/35/25/10/5/2.5 plates. kg set (Settings): 20 bar, 25/20/15/10/5/2.5/1.25.
@@ -423,7 +409,8 @@ fun PlateDialog(targetLb: Double, kgPlates: Boolean, metric: Boolean, onDismiss:
         text = {
             Column {
                 Stepper(stringResource(R.string.target), Fmt.weight(target, metric),
-                    { target = (target - 5).coerceAtLeast(0.0) }, { target += 5 })
+                    { target = (target - 5).coerceAtLeast(0.0) }, { target += 5 },
+                    editValue = Fmt.weightNum(target, metric), onSet = { v -> target = Fmt.toLb(v, metric).coerceIn(0.0, 2000.0) })
                 Spacer(Modifier.height(8.dp))
                 Text(stringResource(R.string.bar_is, "${Fmt.num(if (kgPlates) PlateMath.KG_BAR else PlateMath.LB_BAR)} $unit"))
                 Text(stringResource(R.string.per_side) + ": " + if (res.perSide.isEmpty()) "—" else res.perSide.joinToString(" + ") { Fmt.num(it) } + " $unit",

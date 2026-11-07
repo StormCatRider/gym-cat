@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.7 — Nov 7 2026 (type any number)
+- Every − value + control now lets you **tap the number and type it** (underlined = tappable): onboarding days, height, weight; Settings profile, weekly goal, rest times, reminder time; routine sets, reps, minutes, seconds, rest; cardio intervals; stretch seconds; per-exercise rest; plate calculator target. (Workout set cards already worked this way.)
+- Typed values follow the units shown (kg/cm when metric) and are kept inside the same limits as the buttons.
+- Times accept `1:30` or plain seconds (`90`); the reminder accepts `18:30` or just the hour (`7`).
+- The number box opens with the keyboard up and the old value selected, so you just type.
+
 ## 1.0.6 — Nov 7 2026 (first run on a phone)
 - **Unreadable first screens:** with the phone in dark mode, onboarding drew light text on the phone's light window color. Every screen now sits on the palette background (light or dark to match the text).
 - Onboarding no longer slides under the status bar (safe-area padding), and titles and questions are centered.
