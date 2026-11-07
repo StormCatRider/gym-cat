@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- GUÍA: todo el texto en español. Generado por tools/strings/build_strings.py - edita allí. -->
+<resources>
+    <string name="app_name">Gym Cat</string>
+    <string name="tab_home">Inicio</string>
+    <string name="tab_routines">Rutinas</string>
+    <string name="tab_progress">Progreso</string>
+    <string name="tab_body">Cuerpo</string>
+    <string name="home_subtitle">A moverse hoy</string>
+    <string name="settings">Ajustes</string>
+    <string name="back">Atrás</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="ok">OK</string>
+    <string name="done">Listo</string>
+    <string name="delete">Borrar</string>
+    <string name="edit">Editar</string>
+    <string name="add">Agregar</string>
+    <string name="next">Siguiente</string>
+    <string name="start">Empezar</string>
+    <string name="stop">Detener</string>
+    <string name="pause">Pausa</string>
+    <string name="skip">Saltar</string>
+    <string name="change">Cambiar</string>
+    <string name="clear">Limpiar</string>
+    <string name="all">Todos</string>
+    <string name="none">Ninguno</string>
+    <string name="allow">Permitir</string>
+    <string name="share">Compartir</string>
+    <string name="search">Buscar</string>
+    <string name="name">Nombre</string>
+    <string name="emoji">Emoji</string>
+    <string name="type">Tipo</string>
+    <string name="time">Hora</string>
+    <string name="total">Total</string>
+    <string name="latest">Último</string>
+    <string name="resume_workout">Continuar entrenamiento</string>
+    <string name="missed_day_title">Te saltaste un día del plan</string>
+    <string name="missed_day_body">¿Haces ese entrenamiento ahora o lo saltas y pasas al siguiente día?</string>
+    <string name="do_it_now">Hacerlo ahora</string>
+    <string name="skip_it">Saltarlo</string>
+    <string name="deload_title">¿Toca una semana ligera?</string>
+    <string name="deload_body" formatted="false">El progreso se estancó o ya pasaron 6+ semanas. Una descarga usa 90% del peso y la mitad de las series.</string>
+    <string name="not_now">Ahora no</string>
+    <string name="start_deload">Empezar entrenamiento de descarga</string>
+    <string name="next_workout">Próximo entrenamiento</string>
+    <string name="no_plan_yet">Aún no tienes plan. Empieza uno libre o elige un programa.</string>
+    <string name="free_workout">Entrenamiento libre</string>
+    <string name="start_empty">Entrenamiento vacío</string>
+    <string name="pick_program">Elegir programa</string>
+    <string name="this_week">Esta semana</string>
+    <string name="days_of_goal">%1$d de %2$d días</string>
+    <string name="streak_weeks">Racha de %1$d semanas</string>
+    <string name="freezes_n">%1$d congeladores</string>
+    <string name="best_streak">mejor %1$d</string>
+    <string name="latest_win">Último logro</string>
+    <string name="latest_win_empty">Tu primera medalla está a un entrenamiento.</string>
+    <string name="start_workout">Empezar entrenamiento</string>
+    <string name="start_program_day">Siguiente día del programa</string>
+    <string name="cardio_gps">Correr al aire libre (GPS)</string>
+    <string name="cardio_timer">Cronómetro de cardio</string>
+    <string name="cardio_intervals">Temporizador de intervalos</string>
+    <string name="cardio_manual">Registrar cardio a mano</string>
+    <string name="guided_stretch">Estiramiento guiado</string>
+    <string name="log_class">Clase o deporte</string>
+    <string name="minutes">Minutos</string>
+    <string name="no_active_workout">No hay entrenamiento en curso.</string>
+    <string name="discard">Descartar</string>
+    <string name="finish">Terminar</string>
+    <string name="rest">Descanso</string>
+    <string name="add_exercise">Agregar ejercicio</string>
+    <string name="add_set">Agregar serie</string>
+    <string name="discard_title">¿Descartar este entrenamiento?</string>
+    <string name="nothing_logged">No marcaste ninguna serie, así que no se guardó nada.</string>
+    <string name="discard_body">No se guardará nada.</string>
+    <string name="superset">Superserie</string>
+    <string name="how_to">Cómo se hace</string>
+    <string name="swap_exercise">Cambiar ejercicio</string>
+    <string name="skip_exercise">Saltar ejercicio</string>
+    <string name="move_up">Subir</string>
+    <string name="move_down">Bajar</string>
+    <string name="superset_with_next">Superserie con el siguiente</string>
+    <string name="plate_calculator">Calculadora de discos</string>
+    <string name="last_time">La vez pasada: %1$s</string>
+    <string name="suggested_weight">Prueba %1$s (toca para usar)</string>
+    <string name="set_warmup">Calentamiento</string>
+    <string name="set_working">Efectiva</string>
+    <string name="set_drop">Descendente</string>
+    <string name="set_failure">Al fallo</string>
+    <string name="per_dumbbell">por manc.</string>
+    <string name="reps">Reps</string>
+    <string name="seconds">Segundos</string>
+    <string name="e1rm_both">1RM estimado — Epley %1$s · Brzycki %2$s</string>
+    <string name="note">Nota</string>
+    <string name="notes">Notas</string>
+    <string name="add_note">Agregar nota</string>
+    <string name="target">Objetivo</string>
+    <string name="bar_is">Barra: %1$s</string>
+    <string name="per_side">Por lado</string>
+    <string name="plates_leftover">No se pueden formar %1$s con estos discos</string>
+    <string name="plates_total">Total en la barra: %1$s</string>
+    <string name="finish_title">Terminar entrenamiento</string>
+    <string name="how_did_it_feel">¿Cómo se sintió?</string>
+    <string name="save_changes_routine">Guardar cambios en la rutina</string>
+    <string name="save_as_routine">Guardar como rutina nueva</string>
+    <string name="workout_done">¡Entrenamiento listo!</string>
+    <string name="duration">Duración</string>
+    <string name="volume">Volumen</string>
+    <string name="sets">Series</string>
+    <string name="calories">Calorías</string>
+    <string name="protein_today">Proteína hoy hasta ahora: %1$d g</string>
+    <string name="new_records">Nuevos récords</string>
+    <string name="new_badges">Nuevas medallas</string>
+    <string name="level_up_title">¿Subir de nivel en %1$s?</string>
+    <string name="level_up_body">Llegaste a la meta. Siguiente nivel: %1$s</string>
+    <string name="level_up_yes">Subir de nivel</string>
+    <string name="not_yet">Todavía no</string>
+    <string name="pr_weight">%1$s: más pesado %2$s</string>
+    <string name="pr_e1rm">%1$s: mejor 1RM estimado %2$s</string>
+    <string name="pr_reps">%1$s: %2$d reps</string>
+    <string name="pr_hold">%1$s: %2$s sostenido</string>
+    <string name="pr_distance">%1$s: más larga %2$s</string>
+    <string name="pr_pace">%1$s: más rápido %2$s</string>
+    <string name="programs">Programas</string>
+    <string name="active">Activo</string>
+    <string name="days_per_week_n">%1$d días por semana</string>
+    <string name="start_next_day">Empezar siguiente día</string>
+    <string name="stop_program">Dejar programa</string>
+    <string name="follow_program">Seguir este programa</string>
+    <string name="my_routines">Mis rutinas</string>
+    <string name="new_routine">Nueva</string>
+    <string name="import_file">Importar archivo</string>
+    <string name="scan_qr">Escanear QR</string>
+    <string name="no_routines">Aún no hay rutinas. Crea una o importa la de un amigo.</string>
+    <string name="share_file">Compartir como archivo</string>
+    <string name="show_qr">Mostrar QR</string>
+    <string name="delete_routine">¿Borrar esta rutina?</string>
+    <string name="imported_routine">Se importó \"%1$s\"</string>
+    <string name="import_failed">Eso no es una rutina de Gym Cat.</string>
+    <string name="routine_name">Nombre de la rutina</string>
+    <string name="reps_min">Reps desde</string>
+    <string name="reps_max">Reps hasta</string>
+    <string name="target_rpe">RPE objetivo (qué tan duro, 1–10)</string>
+    <string name="auto_warmups">Series de calentamiento automáticas</string>
+    <string name="default_short">Normal</string>
+    <string name="qr_help">Pide a tu amigo abrir Gym Cat → Rutinas → Escanear QR.</string>
+    <string name="qr_too_big">Esta rutina es muy larga para un QR. Compártela como archivo.</string>
+    <string name="camera_needed">Se necesita permiso de cámara para escanear.</string>
+    <string name="library">Biblioteca de ejercicios</string>
+    <string name="choose_exercise">Elige ejercicio</string>
+    <string name="my_exercise">Mío</string>
+    <string name="muscle">Músculo</string>
+    <string name="equipment">Equipo</string>
+    <string name="n_exercises">%1$d ejercicios</string>
+    <string name="favorite">Favorito</string>
+    <string name="muscles_worked">Músculos trabajados</string>
+    <string name="primary">Principal</string>
+    <string name="secondary">Secundarios</string>
+    <string name="mistakes">Errores comunes</string>
+    <string name="your_records">Tus récords</string>
+    <string name="heaviest">Más pesado</string>
+    <string name="chart_e1rm_legend">Azul: 1RM Epley · Marino: 1RM Brzycki · Amarillo: peso máximo</string>
+    <string name="most_reps">Más repeticiones</string>
+    <string name="longest_hold">Mayor tiempo</string>
+    <string name="longest">Más larga</string>
+    <string name="your_rest">Tu descanso</string>
+    <string name="copy_and_edit">Copiar y editar</string>
+    <string name="how_logged">Cómo se registra</string>
+    <string name="compound_lift">Ejercicio compuesto (más descanso)</string>
+    <string name="distance">Distancia</string>
+    <string name="pace">Ritmo</string>
+    <string name="work">Trabajo</string>
+    <string name="rounds">Rondas</string>
+    <string name="round_of">%1$d de %2$d</string>
+    <string name="intervals_done">Intervalos terminados. ¡Bien!</string>
+    <string name="gps_permission_title">Ubicación para tu carrera</string>
+    <string name="gps_permission_body">Gym Cat usa el GPS solo mientras grabas una carrera, para medir la distancia. Sin internet, sin mapa, nada sale de tu teléfono.</string>
+    <string name="splits">Tiempo por milla</string>
+    <string name="start_run">Empezar carrera</string>
+    <string name="next_up">Siguiente:</string>
+    <string name="stretch_done">¡Bien estirado!</string>
+    <string name="add_stretch">Agregar estiramiento</string>
+    <string name="history">Historial</string>
+    <string name="no_workouts_title">Aún no hay entrenamientos</string>
+    <string name="no_workouts_body">Toca el + grande para empezar el primero.</string>
+    <string name="calendar">Calendario</string>
+    <string name="workouts_per_week">Entrenamientos por semana</string>
+    <string name="per_exercise">Por ejercicio</string>
+    <string name="sets_per_muscle_week">Series por músculo esta semana</string>
+    <string name="nothing_this_week">Nada todavía esta semana.</string>
+    <string name="weekly_volume">Volumen semanal (lb × reps)</string>
+    <string name="body_weight">Peso corporal</string>
+    <string name="body_weight_hc_off">Activa Health Connect en Ajustes para ver el peso que registras en Gym &amp; Ñam.</string>
+    <string name="body_weight_none">Aún no hay registros de peso.</string>
+    <string name="records">Récords</string>
+    <string name="badges">Medallas</string>
+    <string name="skill_ladders">Escaleras de habilidad</string>
+    <string name="ladder_current">Ahora: %1$s</string>
+    <string name="ladder_target_reps">Meta para subir: %1$d × %2$d reps</string>
+    <string name="ladder_target_hold">Meta para subir: %1$d × %2$d s</string>
+    <string name="step_down">Más fácil</string>
+    <string name="step_up">Más difícil</string>
+    <string name="history_hint">Toca un entrenamiento para ver cada serie. El historial completo de cada ejercicio está en la biblioteca.</string>
+    <string name="delete_workout">¿Borrar este entrenamiento?</string>
+    <string name="delete_workout_body">Sus calorías también se quitan de Health Connect.</string>
+    <string name="muscle_map">Mapa muscular</string>
+    <string name="muscle_map_hint">Más oscuro = más series esta semana (10+ = color completo).</string>
+    <string name="front">Frente</string>
+    <string name="back_view">Espalda</string>
+    <string name="measurements">Medidas</string>
+    <string name="no_measurements">Aún no hay medidas.</string>
+    <string name="m_neck">Cuello</string>
+    <string name="m_chest">Pecho</string>
+    <string name="m_arm">Brazo</string>
+    <string name="m_waist">Cintura</string>
+    <string name="m_hip">Cadera</string>
+    <string name="m_thigh">Muslo</string>
+    <string name="body_fat_navy">Grasa corporal (método Navy): %1$s%%</string>
+    <string name="body_fat_note">Estimación, aprox. ± 3–4 puntos.</string>
+    <string name="body_fat_needs">La grasa corporal necesita cuello + cintura (+ cadera en mujeres) y tu estatura en Ajustes.</string>
+    <string name="progress_photos">Fotos de progreso</string>
+    <string name="photos_private">Se guardan solo dentro de Gym Cat, nunca en tu galería.</string>
+    <string name="camera">Cámara</string>
+    <string name="gallery">Galería</string>
+    <string name="compare">Comparar</string>
+    <string name="tap_two_to_compare">Toca dos fotos para compararlas.</string>
+    <string name="delete_photo">Borrar foto seleccionada</string>
+    <string name="look">Apariencia</string>
+    <string name="palette">Color</string>
+    <string name="dark_mode">Modo oscuro</string>
+    <string name="units">Unidades</string>
+    <string name="metric_units">Mostrar kg / km / cm</string>
+    <string name="metric_units_sub">Solo cambia lo que ves. Los datos se guardan en lb para coincidir con Gym &amp; Ñam.</string>
+    <string name="kg_plates">Discos en kilos</string>
+    <string name="kg_plates_sub">La calculadora usa barra de 20 kg y discos en kg.</string>
+    <string name="profile">Perfil</string>
+    <string name="male">Hombre</string>
+    <string name="female">Mujer</string>
+    <string name="height">Estatura</string>
+    <string name="using_hc_weight">Usando %1$s de Health Connect</string>
+    <string name="weekly_goal_days">Meta semanal (días)</string>
+    <string name="workout_settings">Entrenamiento</string>
+    <string name="default_rest">Descanso normal</string>
+    <string name="compound">Compuesto</string>
+    <string name="isolation">Aislamiento</string>
+    <string name="calisthenics">Calistenia</string>
+    <string name="keep_screen_on">Pantalla encendida al entrenar</string>
+    <string name="workout_notification">Notificación con el tiempo</string>
+    <string name="sounds">Sonidos</string>
+    <string name="vibration">Vibración</string>
+    <string name="meows">Maullidos</string>
+    <string name="meows_sub">Reproduce tus maullidos después de algunas series y con medallas.</string>
+    <string name="voice_cues">Avisos de voz</string>
+    <string name="voice_cues_sub">Dice \"fin del descanso\", cambios de intervalo y cada milla.</string>
+    <string name="health_connect">Health Connect</string>
+    <string name="hc_switch">Conectar con Gym &amp; Ñam</string>
+    <string name="hc_sub">Escribe las calorías del entrenamiento; lee peso corporal y proteína de hoy.</string>
+    <string name="hc_double_count">Consejo: no registres también tus entrenamientos en la hoja de ejercicio de Gym &amp; Ñam, o contarán doble.</string>
+    <string name="hc_unavailable">Health Connect no está instalado en este teléfono.</string>
+    <string name="privacy_lock">Bloqueo de privacidad</string>
+    <string name="app_lock">Bloquear Gym Cat</string>
+    <string name="app_lock_sub">PIN (y huella). Se bloquea de nuevo tras 60 s fuera.</string>
+    <string name="fingerprint">Huella digital</string>
+    <string name="set_pin">Crear PIN</string>
+    <string name="pin_4_8">PIN (4–8 dígitos)</string>
+    <string name="pin_repeat">Repite el PIN</string>
+    <string name="unlock_title">Desbloquear Gym Cat</string>
+    <string name="use_pin">Usar PIN</string>
+    <string name="wrong_pin">PIN incorrecto</string>
+    <string name="reminders">Recordatorios</string>
+    <string name="remind_workout">Días de entrenamiento</string>
+    <string name="remind_measure">Día de medidas</string>
+    <string name="remind_measure_sub">El día 1 de cada mes: medidas y fotos.</string>
+    <string name="backup">Respaldo</string>
+    <string name="backup_now">Respaldar ahora</string>
+    <string name="restore">Restaurar</string>
+    <string name="auto_backup">Respaldo automático semanal</string>
+    <string name="auto_backup_sub">Se guarda en Descargas/GymCat. Incluye tus fotos; otras apps con acceso a archivos pueden ver esa carpeta.</string>
+    <string name="last_backup">Último respaldo: %1$s</string>
+    <string name="backup_failed">No se pudo guardar el respaldo. Prueba otra carpeta.</string>
+    <string name="backup_saved">Respaldo guardado</string>
+    <string name="restore_warning">Esto reemplaza todo en Gym Cat con el respaldo.</string>
+    <string name="restore_done">Respaldo restaurado</string>
+    <string name="restore_failed">Ese archivo no es un respaldo de Gym Cat.</string>
+    <string name="about">Acerca de</string>
+    <string name="about_privacy">Sin internet, sin cuentas, sin anuncios, sin rastreo. Tus datos se quedan en este teléfono.</string>
+    <string name="about_notices">Textos y dibujos de ejercicios originales. Códigos QR con ZXing (Apache 2.0). Valores MET: Compendium of Physical Activities.</string>
+    <string name="privacy_title">Cómo usa Gym Cat los datos de salud</string>
+    <string name="privacy_body">Gym Cat solo usa Health Connect si tú lo activas.\n\n• Escribe: las calorías quemadas de cada entrenamiento, para que Gym &amp; Ñam las sume a tu día.\n• Lee: tu peso corporal (para estimar calorías y la gráfica de peso) y la proteína total de hoy.\n\nNada se envía a ningún lado: Gym Cat no tiene acceso a internet. Puedes apagarlo cuando quieras en Ajustes o en Health Connect.</string>
+    <string name="welcome_title">¡Hola! Soy Gym Cat</string>
+    <string name="welcome_body">Unas preguntas rápidas y te sugiero un plan.</string>
+    <string name="q_level">¿Cuánto has entrenado?</string>
+    <string name="q_goal">¿Cuál es tu meta principal?</string>
+    <string name="q_days">¿Cuántos días a la semana puedes entrenar?</string>
+    <string name="days">Días</string>
+    <string name="q_equipment">¿Con qué cuentas?</string>
+    <string name="q_body">Sobre ti</string>
+    <string name="q_body_why">Se usa para calorías y grasa corporal. Se queda en tu teléfono.</string>
+    <string name="read_from_gymnam">Leer mi peso de Gym &amp; Ñam</string>
+    <string name="q_program">Elige un programa</string>
+    <string name="suggested">Sugerido</string>
+    <string name="no_program_free">Sin programa — registro libre</string>
+    <string name="lets_go">¡Vamos!</string>
+    <string name="notif_resting">Descansando</string>
+    <string name="notif_training">Entrenamiento en curso</string>
+    <string name="notif_gps">Corriendo · %1$s mi</string>
+    <string name="voice_rest_over">Fin del descanso</string>
+    <string name="voice_mile_split">Milla %1$d</string>
+    <string name="channel_workout">Tiempo de entrenamiento</string>
+    <string name="channel_reminders">Recordatorios</string>
+    <string name="remind_workout_title">Hora de entrenar 🐱</string>
+    <string name="remind_workout_text">Hoy toca entrenar. Tu gato cree en ti.</string>
+    <string name="remind_measure_title">Día de medidas 📏</string>
+    <string name="remind_measure_text">Toma tus medidas y una foto de progreso.</string>
+    <string name="widget_small_name">Racha Gym Cat</string>
+    <string name="widget_small_desc">Tu racha semanal</string>
+    <string name="widget_medium_name">Próximo entrenamiento Gym Cat</string>
+    <string name="widget_medium_desc">Próximo entrenamiento con botón Empezar</string>
+    <string-array name="week_days_short">
+        <item>Lu</item>
+        <item>Ma</item>
+        <item>Mi</item>
+        <item>Ju</item>
+        <item>Vi</item>
+        <item>Sá</item>
+        <item>Do</item>
+    </string-array>
+    <string-array name="muscle_names">
+        <item>Pecho</item>
+        <item>Dorsales</item>
+        <item>Espalda alta</item>
+        <item>Trapecio</item>
+        <item>Deltoides frontal</item>
+        <item>Deltoides lateral</item>
+        <item>Deltoides posterior</item>
+        <item>Bíceps</item>
+        <item>Tríceps</item>
+        <item>Antebrazos</item>
+        <item>Abdomen</item>
+        <item>Oblicuos</item>
+        <item>Espalda baja</item>
+        <item>Glúteos</item>
+        <item>Cuádriceps</item>
+        <item>Isquiotibiales</item>
+        <item>Pantorrillas</item>
+        <item>Aductores</item>
+    </string-array>
+    <string-array name="equipment_names">
+        <item>Barra</item>
+        <item>Mancuerna</item>
+        <item>Máquina</item>
+        <item>Polea</item>
+        <item>Peso corporal</item>
+        <item>Liga</item>
+        <item>Pesa rusa</item>
+        <item>Smith</item>
+        <item>Barra Z</item>
+        <item>Barra hexagonal</item>
+        <item>Disco</item>
+        <item>Otro</item>
+        <item>Ninguno</item>
+    </string-array>
+    <string-array name="exercise_types">
+        <item>Fuerza</item>
+        <item>Calistenia</item>
+        <item>Cardio</item>
+        <item>Estiramiento</item>
+    </string-array>
+    <string-array name="log_modes">
+        <item>Peso × reps</item>
+        <item>Reps con peso corporal</item>
+        <item>Sostener (segundos)</item>
+        <item>Cardio (tiempo + distancia)</item>
+        <item>Estiramiento (segundos)</item>
+    </string-array>
+    <string-array name="levels">
+        <item>Nuevo en el gimnasio</item>
+        <item>Algo de experiencia (6+ meses)</item>
+        <item>Con experiencia (2+ años)</item>
+    </string-array>
+    <string-array name="goals">
+        <item>Ser más fuerte</item>
+        <item>Ganar músculo</item>
+        <item>Perder grasa</item>
+        <item>Condición general</item>
+    </string-array>
+    <string-array name="equipment_access">
+        <item>Gimnasio completo</item>
+        <item>Mancuernas en casa</item>
+        <item>Solo mi cuerpo</item>
+    </string-array>
+    <string-array name="theme_modes">
+        <item>Como el teléfono</item>
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
+    <string-array name="class_types">
+        <item>Yoga</item>
+        <item>Pilates</item>
+        <item>Clase de ciclismo indoor</item>
+        <item>Clase de HIIT</item>
+        <item>Clase de baile</item>
+        <item>Fútbol</item>
+        <item>Básquetbol</item>
+        <item>Tenis</item>
+        <item>Natación</item>
+        <item>Senderismo</item>
+        <item>Artes marciales / box</item>
+        <item>Otro</item>
+    </string-array>
+</resources>

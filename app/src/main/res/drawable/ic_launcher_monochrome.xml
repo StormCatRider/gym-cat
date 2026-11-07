@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PLAIN-ENGLISH GUIDE: one-color version for Android "themed icons": plate ring + cat cut-out shape. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:strokeColor="#000000" android:strokeWidth="5" android:fillColor="#00000000"
+        android:pathData="M54,24.5 A29.5,29.5 0 1,1 53.99,24.5 Z" />
+    <path android:fillColor="#000000" android:pathData="M54,39 A9,9 0 1,1 53.99,39 Z" />
+    <path android:fillColor="#000000" android:pathData="M46.4,44 L46.8,34.5 L52.4,40.8 Z" />
+    <path android:fillColor="#000000" android:pathData="M55.6,40.8 L61.2,34.5 L61.6,44 Z" />
+    <path android:fillColor="#000000"
+        android:pathData="M44.4,74 C42.8,60.4 47.6,54.8 54,54.8 C60.4,54.8 65.2,60.4 63.6,74 Z" />
+    <path android:strokeColor="#000000" android:strokeWidth="4" android:strokeLineCap="round"
+        android:fillColor="#00000000" android:pathData="M62.8,72.4 Q74,70.8 71.6,60.4" />
+</vector>

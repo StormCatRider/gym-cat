@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PLAIN-ENGLISH GUIDE: the window theme before Compose draws. Real colors live in ui/theme/Theme.kt. -->
+<resources>
+    <style name="Theme.GymCat" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+    </style>
+</resources>

@@ -1,0 +1,17 @@
+# Android Studio / Gradle build output (made on your computer, not code)
+.gradle/
+build/
+app/build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+# Signing keys — never upload these
+*.jks
+*.keystore
+keystore.properties
+# Python caches from the tools/ scripts
+__pycache__/

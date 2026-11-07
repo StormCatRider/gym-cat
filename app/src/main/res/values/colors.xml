@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PLAIN-ENGLISH GUIDE: colors Android needs outside Compose (icon background, window). -->
+<resources>
+    <color name="ic_launcher_bg">#E6F1FB</color>
+    <color name="window_bg">#F1F7FD</color>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+PLAIN-ENGLISH GUIDE — icon option A (approved preview): a blue sitting cat in front of a
+navy weight plate. Canvas is 108x108; everything sits inside the central safe circle.
+Original drawing (simple circles + triangles), no copyrighted art.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- weight plate -->
+    <path android:fillColor="#1F3A5A"
+        android:pathData="M54,22 A32,32 0 1,1 53.99,22 Z" />
+    <path android:strokeColor="#2E5480" android:strokeWidth="1.6" android:fillColor="#00000000"
+        android:pathData="M54,29 A25,25 0 1,1 53.99,29 Z" />
+    <!-- cat head -->
+    <path android:fillColor="#4A9BE0"
+        android:pathData="M54,39 A9,9 0 1,1 53.99,39 Z" />
+    <!-- ears -->
+    <path android:fillColor="#4A9BE0" android:pathData="M46.4,44 L46.8,34.5 L52.4,40.8 Z" />
+    <path android:fillColor="#4A9BE0" android:pathData="M55.6,40.8 L61.2,34.5 L61.6,44 Z" />
+    <!-- body -->
+    <path android:fillColor="#4A9BE0"
+        android:pathData="M44.4,74 C42.8,60.4 47.6,54.8 54,54.8 C60.4,54.8 65.2,60.4 63.6,74 Z" />
+    <!-- tail -->
+    <path android:strokeColor="#4A9BE0" android:strokeWidth="4" android:strokeLineCap="round"
+        android:fillColor="#00000000" android:pathData="M62.8,72.4 Q74,70.8 71.6,60.4" />
+</vector>
