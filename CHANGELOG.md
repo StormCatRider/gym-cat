@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.4 — Nov 7 2026 (first-build fix)
+- Android Studio stopped with "connect-client 1.1.0 requires compileSdk 36 and AGP 8.9.1". Updated to **AGP 8.9.1** and **compileSdk 36**, matching Gym & Ñam. minSdk (29) and targetSdk (35) are unchanged, so the same phones can install it and it behaves the same.
+
 ## 1.0.3 — Nov 7 2026 (cat images added)
 - **39 cat images** added to `res/drawable-nodpi/` (512 × 512, transparent, 1.42 MB total). Every name the app uses is found.
 - New `tools/images/prepare_cats.py`: trims, squares (6% margin), shrinks and compresses images. It keeps full quality when 256 colors would change the look (4 images: freeze, empty, leg press, lat pulldown).

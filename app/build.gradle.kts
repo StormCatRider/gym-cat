@@ -14,14 +14,17 @@ plugins {
 
 android {
     namespace = "com.gymcat.app"
-    compileSdk = 35
+    // compileSdk = which Android version's tools we build WITH (36 = Android 16).
+    // Health Connect 1.1.0 requires 36. This does NOT change which phones can install
+    // the app (that's minSdk = 29, Android 10+) or how the app behaves (targetSdk).
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.gymcat.app"   // unique id on the phone (different from Gym & Ñam)
         minSdk = 29
         targetSdk = 35
-        versionCode = 4
-        versionName = "1.0.3"
+        versionCode = 5
+        versionName = "1.0.4"
         vectorDrawables { useSupportLibrary = true }
     }
 

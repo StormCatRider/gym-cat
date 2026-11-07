@@ -3,7 +3,7 @@
 # both apps build the same way. [libraries] = code we use,
 # [plugins] = build tools.
 [versions]
-agp = "8.7.3"
+agp = "8.9.1"          # 8.9.1+ is required by Health Connect 1.1.0 (same as Gym & Ñam)
 kotlin = "2.1.0"
 ksp = "2.1.0-1.0.29"
 coreKtx = "1.15.0"

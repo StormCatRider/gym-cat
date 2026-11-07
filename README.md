@@ -1,4 +1,4 @@
-# Gym Cat 🐱🏋️ — v1.0.3
+# Gym Cat 🐱🏋️ — v1.0.4
 
 Android workout tracker and companion to **Gym & Ñam**. Kotlin + Jetpack Compose, with the same tech stack and versions as Gym & Ñam. English and Spanish (it follows the phone's language).
 
